@@ -1,0 +1,34 @@
+.themeTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  background-color: rgb(4, 9, 87);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--foreground);
+  margin-right: 1rem;
+  vertical-align: middle;
+  transition: background-color 0.2s ease;
+  gap: 0.35rem;
+}
+
+.themeTag:hover {
+  background-color: rgb(9, 18, 146);
+}
+
+.emoji {
+  font-size: 1rem;
+  margin-right: 0.1rem;
+}
+
+@media (max-width: 640px) {
+  .themeTag {
+    padding: 0.15rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .emoji {
+    font-size: 0.9rem;
+  }
+}

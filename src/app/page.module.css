@@ -32,6 +32,8 @@
   flex-direction: column;
   gap: 32px;
   grid-row-start: 2;
+  width: 100%; /* Ensure it takes full width */
+  max-width: 1200px; /* Match the feed container width */
 }
 
 .main ol {
@@ -68,10 +70,7 @@
   padding: 0 20px;
   border: none;
   border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -164,5 +163,194 @@ a.secondary {
 @media (prefers-color-scheme: dark) {
   .logo {
     filter: invert();
+  }
+}
+
+/* Article layout with content overlay */
+.articleContainer {
+  position: relative;
+  width: 100%;
+}
+
+/* Article header with metadata */
+.articleHeader {
+  margin-bottom: 2rem;
+}
+
+.articleMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+}
+
+/* Date styling */
+.date {
+  color: var(--foreground);
+  opacity: 0.6;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Summary styling */
+.summary {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 1rem;
+  color: var(--foreground);
+  opacity: 0.85;
+  font-style: italic;
+  border-left: 3px solid var(--gray-alpha-200);
+  padding-left: 1rem;
+}
+
+/* Article Detail - Notion-like markdown styles */
+.articleDetail {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: var(--font-geist-sans);
+  line-height: 1.6;
+  color: var(--foreground);
+}
+
+.articleDetail h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.articleDetail h2 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-top: 1.8rem;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.015em;
+}
+
+.articleDetail h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.articleDetail h4,
+.articleDetail h5,
+.articleDetail h6 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.articleDetail p {
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+}
+
+.articleDetail ul,
+.articleDetail ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.articleDetail li {
+  margin-bottom: 0.5rem;
+}
+
+.articleDetail blockquote {
+  border-left: 4px solid var(--gray-alpha-200);
+  margin: 1.5rem 0;
+  padding: 0.8rem 1rem;
+  background-color: var(--gray-alpha-100);
+  border-radius: 4px;
+  font-style: italic;
+}
+
+.articleDetail pre {
+  background-color: var(--gray-alpha-100);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow: auto;
+  margin: 1.5rem 0;
+  font-family: var(--font-geist-mono);
+  font-size: 0.9rem;
+}
+
+.articleDetail code {
+  font-family: var(--font-geist-mono);
+  background: var(--gray-alpha-100);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.articleDetail pre code {
+  background: none;
+  padding: 0;
+}
+
+.articleDetail img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+}
+
+.articleDetail a {
+  color: #3291ff;
+  text-decoration: none;
+}
+
+.articleDetail a:hover {
+  text-decoration: underline;
+}
+
+.articleDetail hr {
+  border: none;
+  border-top: 1px solid var(--gray-alpha-200);
+  margin: 2rem 0;
+}
+
+.articleDetail table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.articleDetail table th,
+.articleDetail table td {
+  border: 1px solid var(--gray-alpha-200);
+  padding: 0.5rem;
+}
+
+.articleDetail table th {
+  background-color: var(--gray-alpha-100);
+  font-weight: 600;
+}
+
+/* Checkbox lists styling */
+.articleDetail input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .articleDetail {
+    padding: 16px;
+  }
+
+  .articleDetail h1 {
+    font-size: 2rem;
+  }
+
+  .articleDetail h2 {
+    font-size: 1.5rem;
+  }
+
+  .articleDetail h3 {
+    font-size: 1.25rem;
   }
 }
