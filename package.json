@@ -2,16 +2,20 @@
   "name": "lesite",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Epwo.github.io/blog.github.io",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d .next/server/app"
   },
   "dependencies": {
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-icons": "^1.3.2",
     "classnames": "^2.5.1",
+    "gh-pages": "^6.3.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.514.0",
     "next": "15.3.3",
