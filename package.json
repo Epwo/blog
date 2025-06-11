@@ -6,7 +6,7 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
-    "deploy": "next build && gh-pages -d out"
+    "deploy": "next build && echo swagman.fr > out/CNAME && touch out/.nojekyll && gh-pages -d out -t true"
   },
   "dependencies": {
     "@radix-ui/colors": "^3.0.0",
@@ -19,7 +19,8 @@
     "radix-ui": "^1.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-markdown": "^10.1.0"
+    "react-markdown": "^10.1.0",
+    "cross-env": "^7.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

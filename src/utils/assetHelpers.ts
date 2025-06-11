@@ -1,14 +1,8 @@
 /**
- * Helper function to ensure asset paths include the correct basePath prefix
- * for both development and production environments.
+ * Helper function to ensure correct asset paths
+ * For root domain deployment, we just need to ensure paths start with '/'
  */
 export function getAssetPath(path: string): string {
-  // Check if we're in production to add the basePath
-  const isProd = process.env.NODE_ENV === "production";
-  const basePath = isProd ? "/blog" : "";
-
-  // Ensure path starts with a slash
-  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-
-  return `${basePath}${normalizedPath}`;
+  // Make sure path starts with a slash
+  return path.startsWith("/") ? path : `/${path}`;
 }

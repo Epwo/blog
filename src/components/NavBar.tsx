@@ -13,7 +13,6 @@ import {
   SelectLabel,
   SelectItem,
 } from "@/app/ui/select/select";
-import { getAssetPath } from "@/utils/assetHelpers";
 import React from "react";
 
 const theme: "light" | "dark" = "dark"; // Replace with your theme logic
@@ -24,8 +23,8 @@ const NavBar = () => {
       <Link href="/" className="navlink">
         <Image
           priority
-          // Use getAssetPath to ensure the image path is correct
-          src={getAssetPath("/swagman-SignB.svg")}
+          // Use a simple path for root domain
+          src="/swagman-SignB.svg"
           alt="Logo"
           width={250}
           height={0}

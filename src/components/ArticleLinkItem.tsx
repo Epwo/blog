@@ -14,7 +14,6 @@ type Article = {
 export default function ArticleLinkItem({ article }: { article: Article }) {
   const formattedDate = formatDate(article.date);
 
-  // This Link component will automatically handle the basePath configuration
   return (
     <Link href={`/articles/${article.slug}`} className={styles.articleLink}>
       <div className={styles.articleItem}>
