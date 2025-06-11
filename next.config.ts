@@ -4,7 +4,9 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   output: "export",
-  assetPrefix: isProd ? "" : "",
+  // Add basePath back as we're using /blog path on the domain
+  basePath: isProd ? "/blog" : "",
+  assetPrefix: isProd ? "/blog/" : "",
   images: {
     unoptimized: true,
   },

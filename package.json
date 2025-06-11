@@ -2,7 +2,7 @@
   "name": "lesite",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://swagman.fr",
+  "homepage": "https://swagman.fr/blog",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

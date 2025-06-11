@@ -23,7 +23,6 @@ const theme: "light" | "dark" = "dark"; // Replace with your theme logic
 const NavBar = () => {
   return (
     <nav className="navbar">
-      {/* Update to use absolute path without base path */}
       <Link href="/" className="navlink">
         <Image
           priority
