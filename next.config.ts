@@ -4,21 +4,15 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   output: "export",
-  // Ensure basePath is always set for production
-  basePath: isProd ? "/blog" : "",
-  // Make sure assetPrefix ends with a slash for proper path resolution
-  assetPrefix: isProd ? "/blog/" : "",
+  // Ensure basePath is set correctly for the custom domain
+  basePath: "",
+  // Don't use assetPrefix with custom domain
+  assetPrefix: "",
   images: {
     unoptimized: true,
   },
-  // Ensure public assets are correctly prefixed
-  webpack: (config) => {
-    return config;
-  },
-  // Add trailingSlash to ensure consistent URL handling
+  // Set this to ensure paths are generated correctly
   trailingSlash: true,
-  // Explicitly set the build directory
-  distDir: "out",
 };
 
 export default nextConfig;

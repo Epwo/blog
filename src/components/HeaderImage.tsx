@@ -1,27 +1,19 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./HeaderImage.module.css";
+import { getAssetPath } from "@/utils/assetHelpers";
 
 type HeaderImageProps = {
   imageUrl?: string;
   title: string;
 };
 
-// Update to include basePath check
-const getImagePath = (path: string) => {
-  const isProd = process.env.NODE_ENV === "production";
-  const basePath = isProd ? "/blog" : "";
-  return `${basePath}${path}`;
-};
-
-// Default image with proper path handling
+// Default image path
 const DEFAULT_IMAGE = "/images/default.jpg";
 
 export default function HeaderImage({ imageUrl, title }: HeaderImageProps) {
-  // Ensure imageUrl is properly formatted for the custom domain
-  const displayImage = imageUrl
-    ? getImagePath(imageUrl)
-    : getImagePath(DEFAULT_IMAGE);
+  // Use the asset helper to get the correct path
+  const displayImage = getAssetPath(imageUrl || DEFAULT_IMAGE);
 
   return (
     <div className={styles.headerImageContainer}>
