@@ -13,21 +13,19 @@ import {
   SelectLabel,
   SelectItem,
 } from "@/app/ui/select/select";
-
+import { getAssetPath } from "@/utils/assetHelpers";
 import React from "react";
 
 const theme: "light" | "dark" = "dark"; // Replace with your theme logic
 
-// Create the SelectItem component
-
 const NavBar = () => {
   return (
     <nav className="navbar">
-      {/* Update to use absolute path without base path */}
       <Link href="/" className="navlink">
         <Image
           priority
-          src="/swagman-SignB.svg"
+          // Use getAssetPath to ensure the image path is correct
+          src={getAssetPath("/swagman-SignB.svg")}
           alt="Logo"
           width={250}
           height={0}

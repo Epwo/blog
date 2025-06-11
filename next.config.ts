@@ -4,14 +4,15 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   output: "export",
-  assetPrefix: isProd ? "" : "",
+  // Important: Include the basePath for correct URL handling
+  basePath: isProd ? "/blog" : "",
+  // Use the same base path for assets
+  assetPrefix: isProd ? "/blog/" : "",
   images: {
     unoptimized: true,
   },
-  // Add this to ensure CSS modules work correctly with static exports
-  webpack: (config) => {
-    return config;
-  },
+  // Ensure paths are generated correctly
+  trailingSlash: true,
 };
 
 export default nextConfig;
