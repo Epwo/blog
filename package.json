@@ -2,7 +2,7 @@
   "name": "lesite",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Epwo.github.io/blog",
+  "homepage": "https://swagman.fr",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

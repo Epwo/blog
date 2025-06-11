@@ -7,9 +7,11 @@ type HeaderImageProps = {
   title: string;
 };
 
-const DEFAULT_IMAGE = "/images/default.jpg"; // Default header image
+// Update to use absolute path without base path
+const DEFAULT_IMAGE = "/images/default.jpg";
 
 export default function HeaderImage({ imageUrl, title }: HeaderImageProps) {
+  // Ensure imageUrl is properly formatted for the custom domain
   const displayImage = imageUrl || DEFAULT_IMAGE;
 
   return (

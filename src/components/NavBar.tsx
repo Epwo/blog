@@ -23,8 +23,8 @@ const theme: "light" | "dark" = "dark"; // Replace with your theme logic
 const NavBar = () => {
   return (
     <nav className="navbar">
-      {/* Use a theme context or prop to determine the current theme */}
-      <Link href="/home" className="navlink">
+      {/* Update to use absolute path without base path */}
+      <Link href="/" className="navlink">
         <Image
           priority
           src="/swagman-SignB.svg"
