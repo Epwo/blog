@@ -4,14 +4,14 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   output: "export",
-  // Ensure basePath is set correctly for the custom domain
-  basePath: "",
-  // Don't use assetPrefix with custom domain
-  assetPrefix: "",
+  // Important: Include the basePath for correct URL handling
+  basePath: isProd ? "/blog" : "",
+  // Use the same base path for assets
+  assetPrefix: isProd ? "/blog/" : "",
   images: {
     unoptimized: true,
   },
-  // Set this to ensure paths are generated correctly
+  // Ensure paths are generated correctly
   trailingSlash: true,
 };
 

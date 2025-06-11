@@ -24,7 +24,7 @@ const NavBar = () => {
       <Link href="/" className="navlink">
         <Image
           priority
-          // Use the asset helper to get the correct path
+          // Use getAssetPath to ensure the image path is correct
           src={getAssetPath("/swagman-SignB.svg")}
           alt="Logo"
           width={250}
