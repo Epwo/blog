@@ -1,6 +1,6 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: "/out/blog",
   output: "export",
+  // No basePath!
 };
-
 module.exports = nextConfig;
