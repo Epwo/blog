@@ -1,14 +1,18 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  output: "export",
-};
-// next.config.js
 const isProd = process.env.NODE_ENV === "production";
 
-module.exports = {
-  basePath: "/blog",
+const nextConfig: NextConfig = {
+  output: "export",
+  basePath: isProd ? "/blog" : "",
   assetPrefix: isProd ? "/blog/" : "",
+  images: {
+    unoptimized: true,
+  },
+  // Add this to ensure CSS modules work correctly with static exports
+  webpack: (config) => {
+    return config;
+  },
 };
 
 export default nextConfig;
