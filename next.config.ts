@@ -1,5 +1,6 @@
 const nextConfig = {
-  basePath: "/blog",
+  distDir: "/out/blog",
   output: "export",
 };
+
 module.exports = nextConfig;
