@@ -6,7 +6,7 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
-    "deploy": "next build && echo swagman.fr > out/CNAME && touch out/.nojekyll && gh-pages -d out -t true"
+    "deploy": "next build && gh-pages -d out -t true"
   },
   "dependencies": {
     "@radix-ui/colors": "^3.0.0",
