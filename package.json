@@ -6,7 +6,7 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
-    "deploy": "next build && gh-pages -d out -t true"
+    "deploy": "next build && gh-pages -d out"
   },
   "dependencies": {
     "@radix-ui/colors": "^3.0.0",
