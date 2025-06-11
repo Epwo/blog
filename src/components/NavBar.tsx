@@ -13,20 +13,23 @@ import {
   SelectLabel,
   SelectItem,
 } from "@/app/ui/select/select";
-
+import { usePathname } from 'next/navigation';
 import React from "react";
 
 const theme: "light" | "dark" = "dark"; // Replace with your theme logic
 
-// Create the SelectItem component
-
 const NavBar = () => {
+  // Check if we're in production to use the correct base path
+  const isProd = process.env.NODE_ENV === "production";
+  const basePath = isProd ? "/blog" : "";
+  
   return (
     <nav className="navbar">
       <Link href="/" className="navlink">
         <Image
           priority
-          src="/swagman-SignB.svg"
+          // Ensure image path includes basePath in production
+          src={`${basePath}/swagman-SignB.svg`}
           alt="Logo"
           width={250}
           height={0}

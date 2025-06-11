@@ -10,6 +10,7 @@ type ArticleNavBarProps = {
 };
 
 const ArticleNavBar = ({ title }: ArticleNavBarProps) => {
+  // Use absolute paths that respect the basePath configuration
   return (
     <div className={styles.navBar}>
       <div className={styles.navBarContent}>

@@ -7,12 +7,21 @@ type HeaderImageProps = {
   title: string;
 };
 
-// Update to use absolute path without base path
+// Update to include basePath check
+const getImagePath = (path: string) => {
+  const isProd = process.env.NODE_ENV === "production";
+  const basePath = isProd ? "/blog" : "";
+  return `${basePath}${path}`;
+};
+
+// Default image with proper path handling
 const DEFAULT_IMAGE = "/images/default.jpg";
 
 export default function HeaderImage({ imageUrl, title }: HeaderImageProps) {
   // Ensure imageUrl is properly formatted for the custom domain
-  const displayImage = imageUrl || DEFAULT_IMAGE;
+  const displayImage = imageUrl
+    ? getImagePath(imageUrl)
+    : getImagePath(DEFAULT_IMAGE);
 
   return (
     <div className={styles.headerImageContainer}>
