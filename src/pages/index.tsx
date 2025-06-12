@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import ArticleFeed from "../components/ArticleFeed";
-import styles from "../app/page.module.css";
+import styles from "@/pages/page.module.css";
 import NavBar from "@/components/NavBar";
 import { GetStaticProps } from "next";
 

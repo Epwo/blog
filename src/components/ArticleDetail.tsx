@@ -1,6 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import styles from "../app/page.module.css";
+import styles from "@/pages/page.module.css";
 import ArticleNavBar from "./ArticleNavBar";
 import HeaderImage from "./HeaderImage";
 import ThemeTag from "./ThemeTag";

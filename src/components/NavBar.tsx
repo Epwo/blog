@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import "../app/globals.css";
 import * as Separator from "@radix-ui/react-separator";
 import {} from "@radix-ui/react-icons";
-import Input from "@/app/ui/input/input";
+import Input from "@/pages/ui/input/input";
 import {
   Select,
   SelectGroup,
@@ -12,7 +11,7 @@ import {
   SelectContent,
   SelectLabel,
   SelectItem,
-} from "@/app/ui/select/select";
+} from "@/pages/ui/select/select";
 import React from "react";
 
 const theme: "light" | "dark" = "dark"; // Replace with your theme logic
