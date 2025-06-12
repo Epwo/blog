@@ -6,16 +6,10 @@ const nextConfig = {
   images: {
     unoptimized: true, // For static export, images need to be unoptimized
   },
-  basePath: "/blog", // Use '/blog' in production
-  assetPrefix: "/blog", // Use '/blog' in production
+  basePath: "/blog",
+  assetPrefix: "/blog/",
 
   // Optional: disable source maps in production for smaller output size
-  productionBrowserSourceMaps: false,
-
-  // Handle GitHub Pages 404s by ensuring we generate a 404.html file
-  generateBuildId: async () => {
-    return "build-id"; // Consistent build ID
-  },
 };
 
 module.exports = nextConfig;
