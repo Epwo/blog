@@ -6,8 +6,8 @@ const nextConfig = {
   images: {
     unoptimized: true, // For static export, images need to be unoptimized
   },
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "", // Use '/blog' in production
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || "", // Use '/blog' in production
+  basePath: "/blog", // Use '/blog' in production
+  assetPrefix: "/blog", // Use '/blog' in production
 
   // Optional: disable source maps in production for smaller output size
   productionBrowserSourceMaps: false,
