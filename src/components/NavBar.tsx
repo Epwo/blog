@@ -14,14 +14,12 @@ import {
   SelectItem,
 } from "@/app/ui/select/select";
 import React from "react";
-import { getAssetPath } from "@/utils/assetHelpers";
 
 const theme: "light" | "dark" = "dark"; // Replace with your theme logic
 
 const NavBar = () => {
   // Use the getAssetPath helper for the logo
-  const logoPath = getAssetPath("/swagman-SignB.svg");
-
+  const logoPath = "/blog/swagman-SignB.svg"; // Adjust the path as needed
   return (
     <nav className="navbar">
       <Link href="/" className="navlink">
