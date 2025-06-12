@@ -29,8 +29,15 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /blog
       - name: Create .nojekyll file
         run: touch ./out/.nojekyll
+      - name: Fix asset paths
+        run: |
+          mkdir -p ./out/_next
+          cp -r ./out/blog/_next/* ./out/_next/ || echo "No blog/_next directory"
+          cp -r ./public/* ./out/ || echo "No public directory"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

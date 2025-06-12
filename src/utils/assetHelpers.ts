@@ -10,13 +10,18 @@ export function getAssetPath(path: string): string {
   // Make sure path starts with a slash
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
 
-  // Check if we're running on GitHub Pages (in production)
-  if (process.env.NODE_ENV === "production") {
-    // For GitHub Pages deployment
-    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/blog";
+  // For GitHub Pages deployment with the blog subdirectory
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-    // Only add the basePath if the path doesn't already include it
-    if (!normalizedPath.startsWith(basePath + "/")) {
+  // Handle client-side execution vs server-side
+  const isBrowser = typeof window !== "undefined";
+  const isProduction =
+    process.env.NODE_ENV === "production" ||
+    (isBrowser && window.location.hostname !== "localhost");
+
+  if (isProduction && basePath) {
+    // Make sure we don't add the base path multiple times
+    if (!normalizedPath.startsWith(basePath)) {
       return `${basePath}${normalizedPath}`;
     }
   }
