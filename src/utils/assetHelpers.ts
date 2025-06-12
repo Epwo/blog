@@ -10,7 +10,16 @@ export function getAssetPath(path: string): string {
   // Make sure path starts with a slash
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
 
-  // In development or if no basePath is configured, return the path as is
-  // In production with basePath, Next.js should handle this automatically
+  // Check if we're running on GitHub Pages (in production)
+  if (process.env.NODE_ENV === "production") {
+    // For GitHub Pages deployment
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/blog";
+
+    // Only add the basePath if the path doesn't already include it
+    if (!normalizedPath.startsWith(basePath + "/")) {
+      return `${basePath}${normalizedPath}`;
+    }
+  }
+
   return normalizedPath;
 }
