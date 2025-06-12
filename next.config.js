@@ -1,32 +1,20 @@
 /** @type {import('next').NextConfig} */
-const isGitHubPages = process.env.GITHUB_ACTIONS || false;
-const repo = isGitHubPages ? "/blog" : "";
 
 const nextConfig = {
-  output: "export", // Required for static export
-  distDir: "out",
-  // Remove trailing slash to avoid path issues
-  basePath: repo,
-  assetPrefix: repo,
+  output: "export", // Enable static exports
+  trailingSlash: true, // Add trailing slashes to URLs for better compatibility with GitHub Pages
   images: {
-    unoptimized: true, // Required for static export with images
-    loader: "custom",
-    loaderFile: "./image-loader.js",
+    unoptimized: true, // For static export, images need to be unoptimized
   },
-  // This is important for GitHub Pages
-  trailingSlash: true,
-  // Ensure environment variables are available
-  env: {
-    NEXT_PUBLIC_BASE_PATH: repo,
-  },
-  // Fix for GitHub Pages asset paths
-  webpack: (config) => {
-    // SVGR configuration for SVG files
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
-    return config;
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "", // Use '/blog' in production
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || "", // Use '/blog' in production
+
+  // Optional: disable source maps in production for smaller output size
+  productionBrowserSourceMaps: false,
+
+  // Handle GitHub Pages 404s by ensuring we generate a 404.html file
+  generateBuildId: async () => {
+    return "build-id"; // Consistent build ID
   },
 };
 

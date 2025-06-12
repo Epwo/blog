@@ -19,7 +19,7 @@ const theme: "light" | "dark" = "dark"; // Replace with your theme logic
 
 const NavBar = () => {
   // Use the getAssetPath helper for the logo
-  const logoPath = "/blog/swagman-SignB.svg"; // Adjust the path as needed
+  const logoPath = "/swagman-SignB.svg"; // Adjust the path as needed
   return (
     <nav className="navbar">
       <Link href="/" className="navlink">
