@@ -4,10 +4,10 @@
   "private": true,
   "homepage": "https://epwo.github.io/blog",
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_ENV=dev next dev",
     "start": "next start",
     "build": "next build",
-    "deploy": "next build && gh-pages -d out"
+    "deploy": "cross-env NODE_ENV=production next build && gh-pages -d out"
   },
   "dependencies": {
     "@radix-ui/colors": "^3.0.0",

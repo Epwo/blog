@@ -20,7 +20,7 @@ const NavBar = () => {
   // Use the getAssetPath helper for the logo
   const logoPath = `${
     process.env.NEXT_PUBLIC_BASE_PATH || ""
-  }"/swagman-SignB.svg"`; // Adjust the path as needed
+  }swagman-SignB.svg"`; // Adjust the path as needed
   return (
     <nav className="navbar">
       <Link href="/" className="navlink">
