@@ -1,31 +1,41 @@
+import React from "react";
 import Link from "next/link";
 import styles from "./ArticleLinkItem.module.css";
 import { formatDate } from "@/utils/dateFormatter";
 import ThemeTag from "./ThemeTag";
 
 type Article = {
-  slug: string;
   title: string;
   date: string;
   excerpt: string;
+  slug: string;
   theme?: string;
 };
 
-export default function ArticleLinkItem({ article }: { article: Article }) {
-  const formattedDate = formatDate(article.date);
+type Props = {
+  article: Article;
+};
+
+const ArticleLinkItem = ({ article }: Props) => {
+  const { title, date, excerpt, slug, theme } = article;
+  const formattedDate = formatDate(date);
 
   return (
-    <Link href={`/articles/${article.slug}`} className={styles.articleLink}>
-      <div className={styles.articleItem}>
-        <div className={styles.articleHeader}>
-          <h2 className={styles.title}>{article.title}</h2>
-          <div className={styles.meta}>
-            {article.theme && <ThemeTag theme={article.theme} />}
-            <p className={styles.date}>{formattedDate}</p>
-          </div>
-        </div>
-        <p className={styles.excerpt}>{article.excerpt}</p>
+    <article className={styles.article}>
+      <div className={styles.metadata}>
+        {date && <time className={styles.date}>{formattedDate}</time>}
+        {theme && <ThemeTag theme={theme} />}
       </div>
-    </Link>
+
+      <h2 className={styles.title}>
+        <Link href={`/articles/${slug}`} className={styles.link}>
+          {title}
+        </Link>
+      </h2>
+
+      <p className={styles.excerpt}>{excerpt}</p>
+    </article>
   );
-}
+};
+
+export default ArticleLinkItem;
