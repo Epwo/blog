@@ -15,8 +15,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     if (!res.ok) throw new Error("Failed to fetch articles list from GitHub");
     const files = await res.json();
     const paths = files
-      .filter((file: any) => file.name.endsWith(".md"))
-      .map((file: any) => ({
+      .filter((file: { name: string }) => file.name.endsWith(".md"))
+      .map((file: { name: string }) => ({
         params: { slug: file.name.replace(/\.md$/, "") },
       }));
     return { paths, fallback: false };

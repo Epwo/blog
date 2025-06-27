@@ -23,9 +23,9 @@ async function getArticlesFromGitHub(): Promise<Article[]> {
     const res = await fetch(`${GITHUB_API_BASE}`);
     if (!res.ok) throw new Error("Failed to fetch articles list from GitHub");
     const files = await res.json();
-    const mdFiles = files.filter((file: any) => file.name.endsWith(".md"));
+    const mdFiles = files.filter((file: { name: string }) => file.name.endsWith(".md"));
     const articles: Article[] = await Promise.all(
-      mdFiles.map(async (file: any) => {
+      mdFiles.map(async (file: { name: string }) => {
         const rawUrl = `${GITHUB_RAW_BASE}/${file.name}`;
         const mdRes = await fetch(rawUrl);
         if (!mdRes.ok) return null;

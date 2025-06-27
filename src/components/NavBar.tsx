@@ -20,7 +20,7 @@ const NavBar = () => {
   // Use the getAssetPath helper for the logo
   const logoPath = `${
     process.env.NEXT_PUBLIC_BASE_PATH || ""
-  }swagman-SignB.svg"`; // Adjust the path as needed
+  }epwo_sign_w.svg`; // Adjust the path as needed
   return (
     <nav className="navbar">
       <Link href="/" className="navlink">
@@ -32,7 +32,7 @@ const NavBar = () => {
           height={0}
           className="logo-navbar"
           style={{
-            filter: theme === "dark" ? "invert(1)" : "none",
+            filter: theme === "dark" ? "None" : "invert(1)",
             height: "auto",
           }}
         />
