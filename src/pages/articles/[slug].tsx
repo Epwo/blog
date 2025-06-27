@@ -1,35 +1,40 @@
-import fs from "fs";
-import path from "path";
 import matter from "gray-matter";
 import ArticleDetail from "@/components/ArticleDetail";
 import { GetStaticProps, GetStaticPaths } from "next";
 
-// Get static paths for all articles
+const GITHUB_OWNER = "epwo";
+const GITHUB_REPO = "articles";
+const GITHUB_BRANCH = "main"; // Change if your default branch is not main
+const GITHUB_API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/articles`;
+const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/articles`;
+
+// Get static paths for all articles from GitHub
 export const getStaticPaths: GetStaticPaths = async () => {
-  const articlesDir = path.join(process.cwd(), "src/articles");
-  const files = fs.readdirSync(articlesDir);
-
-  const paths = files
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => ({
-      params: { slug: file.replace(/\.md$/, "") },
-    }));
-
-  return {
-    paths,
-    fallback: false,
-  };
+  try {
+    const res = await fetch(`${GITHUB_API_BASE}`);
+    if (!res.ok) throw new Error("Failed to fetch articles list from GitHub");
+    const files = await res.json();
+    const paths = files
+      .filter((file: any) => file.name.endsWith(".md"))
+      .map((file: any) => ({
+        params: { slug: file.name.replace(/\.md$/, "") },
+      }));
+    return { paths, fallback: false };
+  } catch (error) {
+    console.error("Error fetching article list from GitHub:", error);
+    return { paths: [], fallback: false };
+  }
 };
 
-// Get static props for the specific article
+// Get static props for the specific article from GitHub
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params as { slug: string };
-  const articlePath = path.join(process.cwd(), "src/articles", `${slug}.md`);
-
+  const url = `${GITHUB_RAW_BASE}/${slug}.md`;
   try {
-    const fileContent = fs.readFileSync(articlePath, "utf8");
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Failed to fetch article from GitHub");
+    const fileContent = await res.text();
     const { data, content } = matter(fileContent);
-
     return {
       props: {
         title: data.title || slug,
@@ -38,12 +43,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         image: data.image || "",
         theme: data.theme || "",
         summary: data.summary || "",
+        error: null,
       },
     };
   } catch (error) {
-    console.error(`Error reading article ${slug}:`, error);
+    console.error(`Error fetching article ${slug} from GitHub:`, error);
     return {
-      notFound: true,
+      props: {
+        title: slug,
+        date: "",
+        content: "",
+        image: "",
+        theme: "",
+        summary: "",
+        error: "Could not fetch article from GitHub.",
+      },
     };
   }
 };
@@ -56,6 +70,7 @@ export default function ArticlePage({
   image,
   theme,
   summary,
+  error,
 }: {
   title: string;
   date: string;
@@ -63,7 +78,11 @@ export default function ArticlePage({
   image: string;
   theme: string;
   summary: string;
+  error?: string | null;
 }) {
+  if (error) {
+    return <div style={{ color: 'red', padding: '2rem' }}>{error}</div>;
+  }
   return (
     <ArticleDetail
       title={title}

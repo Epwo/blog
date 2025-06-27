@@ -13,7 +13,7 @@ const DEFAULT_IMAGE = "/images/default.jpg";
 
 export default function HeaderImage({ imageUrl, title }: HeaderImageProps) {
   // Use the asset helper to get the correct path
-  const displayImage = imageUrl ? getAssetPath(imageUrl) : DEFAULT_IMAGE;
+  const displayImage = imageUrl && imageUrl.trim() !== "" ? getAssetPath(imageUrl) : DEFAULT_IMAGE;
 
   return (
     <div className={styles.headerImageContainer}>
