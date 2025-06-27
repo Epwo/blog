@@ -4,6 +4,7 @@
   display: block;
   transition: background-color 0.2s ease;
   width: 100%;
+
 }
 
 .articleLink:hover {
@@ -17,6 +18,7 @@
   gap: 12px; /* Increased gap */
   cursor: pointer;
   width: 100%;
+  
 }
 
 .articleHeader {
@@ -28,7 +30,8 @@
 .title {
   font-size: 1.5rem; /* Larger title */
   font-weight: 600;
-  margin: 0;
+  margin: auto;
+  padding-left: 2%;
 }
 
 .meta {
@@ -36,19 +39,21 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
+
 }
 
 .date {
   font-size: 0.9rem;
   color: var(--foreground);
   opacity: 0.6;
-  margin: 0;
+  margin: 1%;
 }
 
 .excerpt {
   font-size: 1.1rem; /* Larger text */
   line-height: 1.6;
-  margin: 0;
+  margin: auto;
+  padding-left: 1%;
   white-space: pre-line; /* Preserve line breaks */
 }
 

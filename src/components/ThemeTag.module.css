@@ -1,4 +1,5 @@
 .themeTag {
+  margin:0.5%;
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.75rem;
@@ -9,7 +10,7 @@
   color: var(--foreground);
   margin-right: 1rem;
   vertical-align: middle;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease; 
   gap: 0.35rem;
 }
 
