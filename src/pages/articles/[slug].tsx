@@ -40,6 +40,7 @@ export default function ArticlePage() {
           error: null,
         });
       } catch (error) {
+        console.error("Error fetching article:", error);
         setArticle({
           title: slug as string,
           date: "",
