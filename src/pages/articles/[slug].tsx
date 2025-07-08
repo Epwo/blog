@@ -28,6 +28,7 @@ export default function ArticlePage() {
       try {
         const res = await fetch(url);
         if (!res.ok) throw new Error("Failed to fetch article from GitHub");
+        console.log("sucessfully fetched article from:", url);
         const fileContent = await res.text();
         const { data, content } = matter(fileContent);
         setArticle({
