@@ -1,33 +1,14 @@
 import matter from "gray-matter";
 import ArticleDetail from "@/components/ArticleDetail";
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetServerSideProps } from "next";
 
 const GITHUB_OWNER = "epwo";
 const GITHUB_REPO = "articles";
-const GITHUB_BRANCH = "main"; // Change if your default branch is not main
-const GITHUB_API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/articles`;
+const GITHUB_BRANCH = "main";
 const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/articles`;
 
-// Get static paths for all articles from GitHub
-export const getStaticPaths: GetStaticPaths = async () => {
-  try {
-    const res = await fetch(`${GITHUB_API_BASE}`);
-    if (!res.ok) throw new Error("Failed to fetch articles list from GitHub");
-    const files = await res.json();
-    const paths = files
-      .filter((file: { name: string }) => file.name.endsWith(".md"))
-      .map((file: { name: string }) => ({
-        params: { slug: file.name.replace(/\.md$/, "") },
-      }));
-    return { paths, fallback: false };
-  } catch (error) {
-    console.error("Error fetching article list from GitHub:", error);
-    return { paths: [], fallback: false };
-  }
-};
-
-// Get static props for the specific article from GitHub
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+// Fetch article on every request (SSR)
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { slug } = params as { slug: string };
   const url = `${GITHUB_RAW_BASE}/${slug}.md`;
   try {
