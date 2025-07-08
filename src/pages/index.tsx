@@ -21,7 +21,11 @@ type Article = {
 async function getArticlesFromGitHub(): Promise<Article[]> {
   try {
     const res = await fetch(`${GITHUB_API_BASE}`);
-    if (!res.ok) throw new Error("Failed to fetch articles list from GitHub");
+    if (!res.ok) {
+      const errorBody = await res.text();
+      console.error("GitHub API error:", res.status, errorBody);
+      throw new Error("Failed to fetch articles list from GitHub");
+    }
     const files = await res.json();
     const mdFiles = files.filter((file: { name: string }) => file.name.endsWith(".md"));
     const articles: Article[] = await Promise.all(
