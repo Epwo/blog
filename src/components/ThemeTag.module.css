@@ -14,7 +14,17 @@
   gap: 0.35rem;
 }
 
-.themeTag:hover {
+/* New content wrapper */
+.themeTagContent {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 12px;
+  transition: background-color 0.2s ease;
+  padding: 0.1rem 0.4rem;
+}
+
+/* Only the content changes color on hover */
+.themeTagContent:hover {
   background-color: rgb(9, 18, 146);
 }
 
@@ -27,6 +37,10 @@
   .themeTag {
     padding: 0.15rem 0.5rem;
     font-size: 0.75rem;
+  }
+
+  .themeTagContent {
+    padding: 0.08rem 0.25rem;
   }
 
   .emoji {

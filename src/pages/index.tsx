@@ -72,7 +72,7 @@ export default function Home() {
         {!loading && !error && <ArticleFeed articles={articles} />}
       </main>
       <footer className={styles.footer}>
-        <span>© {new Date().getFullYear()} Ewann P</span>
+        <span>© {new Date().getFullYear()} Ewann P | contact me ! ewann.postic@hotmail.fr </span>
       </footer>
     </div>
   );

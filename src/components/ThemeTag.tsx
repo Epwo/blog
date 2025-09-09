@@ -1,4 +1,3 @@
-
 import React from "react";
 import styles from "./ThemeTag.module.css";
 
@@ -6,7 +5,6 @@ type ThemeTagProps = {
   theme?: string;
 };
 
-// Helper to get display name and emoji for a theme
 function getThemeInfo(theme: string) {
   const normalizedTheme = theme.trim().toLowerCase();
   if (normalizedTheme.includes("code") || normalizedTheme.includes("coding")) {
@@ -26,7 +24,6 @@ function getThemeInfo(theme: string) {
 export default function ThemeTag({ theme }: ThemeTagProps) {
   if (!theme) return null;
 
-  // Split themes by comma, handle multiple themes
   const themeList = theme.split(",").map(t => t.trim()).filter(Boolean);
 
   return (
@@ -34,7 +31,7 @@ export default function ThemeTag({ theme }: ThemeTagProps) {
       {themeList.map((t, idx) => {
         const { display, emoji } = getThemeInfo(t);
         return (
-          <span key={idx} className={styles.themeTag} style={{ marginRight: 6 }}>
+          <span key={idx} className={styles.themeTagContent}>
             <span className={styles.emoji}>{emoji}</span>
             {display}
           </span>

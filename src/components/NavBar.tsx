@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import * as Separator from "@radix-ui/react-separator";
-import {} from "@radix-ui/react-icons";
+import { ChatBubbleIcon } from "@radix-ui/react-icons"
 import Input from "@/components/ui/input/input";
 import {
   Select,
@@ -15,8 +15,8 @@ import {
 import React from "react";
 
 const theme: "light" | "dark" = "dark"; // Replace with your theme logic
-
 const NavBar = () => {
+  const [showContact, setShowContact] = React.useState(false);
   // Use the getAssetPath helper for the logo
   const logoPath = `${
     process.env.NEXT_PUBLIC_BASE_PATH || ""
@@ -28,15 +28,17 @@ const NavBar = () => {
           priority
           src={logoPath}
           alt="Logo"
-          width={250}
+          width={350}
           height={0}
           className="logo-navbar"
           style={{
-            filter: theme === "dark" ? "None" : "invert(1)",
             height: "auto",
           }}
         />
       </Link>
+
+
+      {/* 
       <Separator.Root
         className="SeparatorRoot"
         decorative
@@ -90,6 +92,7 @@ const NavBar = () => {
         placeholder="Search..."
         style={{ minWidth: 50, marginLeft: 16 }}
       />
+      */}
       {/* Add more links here as needed */}
     </nav>
   );
