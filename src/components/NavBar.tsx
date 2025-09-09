@@ -1,22 +1,23 @@
 import Link from "next/link";
 import Image from "next/image";
-import * as Separator from "@radix-ui/react-separator";
-import { ChatBubbleIcon } from "@radix-ui/react-icons"
-import Input from "@/components/ui/input/input";
+//import * as Separator from "@radix-ui/react-separator";
+//import { ChatBubbleIcon } from "@radix-ui/react-icons"
+//import Input from "@/components/ui/input/input";
 import {
+  /*
   Select,
   SelectGroup,
   SelectValue,
   SelectTrigger,
   SelectContent,
   SelectLabel,
+  */
   SelectItem,
 } from "@/components/ui/select/select";
 import React from "react";
 
-const theme: "light" | "dark" = "dark"; // Replace with your theme logic
+//const theme = "dark"; // Replace with your theme logic
 const NavBar = () => {
-  const [showContact, setShowContact] = React.useState(false);
   // Use the getAssetPath helper for the logo
   const logoPath = `${
     process.env.NEXT_PUBLIC_BASE_PATH || ""
