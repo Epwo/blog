@@ -25,6 +25,17 @@ export default function ThemeTag({ theme }: ThemeTagProps) {
   } else if (normalizedTheme.includes("misc")) {
     displayTheme = "Misc";
     emoji = "📌";
+  } else if (normalizedTheme.includes("ml")) {
+    displayTheme = "ML";
+    emoji = "🧠";
+  } else if (normalizedTheme.includes("devops")) {
+    displayTheme = "DevOps";
+    emoji = "🥽";
+  }
+
+  else{
+    displayTheme = normalizedTheme
+    emoji = ""
   }
 
   return (
