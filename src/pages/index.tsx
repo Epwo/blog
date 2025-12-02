@@ -78,8 +78,6 @@ export default function Home() {
           v{
             (() => {
               try {
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          // @ts-ignore
           return packageJson?.version ?? "0.0.0";
               } catch {
           return "0.0.0";
