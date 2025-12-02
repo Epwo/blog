@@ -80,13 +80,11 @@ export const getStaticProps: GetStaticProps<ArticlePageProps> = async (context) 
           summary: data.summary || "",
         },
       },
-      revalidate: 3600, // revalidate every hour
     };
   } catch (error) {
     console.error("Error fetching article:", error);
     return {
       notFound: true,
-      revalidate: 60, // retry after 1 minute if not found
     };
   }
 }
