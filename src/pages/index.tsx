@@ -3,6 +3,7 @@ import matter from "gray-matter";
 import ArticleFeed from "../components/ArticleFeed";
 import styles from "@/pages/page.module.css";
 import NavBar from "@/components/NavBar";
+import packageJson from '../../package.json'
 
 const GITHUB_OWNER = "epwo";
 const GITHUB_REPO = "articles";
@@ -73,6 +74,19 @@ export default function Home() {
       </main>
       <footer className={styles.footer}>
         <span>© {new Date().getFullYear()} Ewann P | contact me ! ewann.postic@hotmail.fr </span>
+        <span>
+          v{
+            (() => {
+              try {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          // @ts-ignore
+          return packageJson?.version ?? "0.0.0";
+              } catch {
+          return "0.0.0";
+              }
+            })()
+          }
+        </span>
       </footer>
     </div>
   );
