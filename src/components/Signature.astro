@@ -1,0 +1,25 @@
+---
+import raw from "@/assets/signature.svg?raw";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+// Strip the fixed size so CSS controls it; fill is currentColor so it follows the theme.
+const svg = raw.replace(/\s(width|height)="\d+"/g, "");
+---
+
+<span class:list={["signature", className]} role="img" aria-label="Epwo" set:html={svg} />
+
+<style>
+  .signature {
+    display: inline-block;
+    color: var(--fg);
+    line-height: 0;
+  }
+  .signature :global(svg) {
+    width: 100%;
+    height: auto;
+  }
+</style>

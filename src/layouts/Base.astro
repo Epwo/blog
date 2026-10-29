@@ -1,0 +1,121 @@
+---
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
+import "@/styles/global.css";
+import Signature from "@/components/Signature.astro";
+import { url } from "@/lib/articles";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+}
+
+const SITE_NAME = "Epwo";
+const {
+  title,
+  description = "Ewann's corner of the internet — notes on code, ML, self-hosting and whatever else I'm building.",
+  image,
+  type = "website",
+} = Astro.props;
+
+const fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} — Ewann P.`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const isHome = Astro.url.pathname.replace(/\/$/, "") === url().replace(/\/$/, "");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={url("favicon.ico")} sizes="any" />
+    <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href={url("rss.xml")} />
+    <link rel="sitemap" href={url("sitemap-index.xml")} />
+
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title ?? SITE_NAME} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {image && <meta property="og:image" content={image} />}
+    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+
+    <meta name="color-scheme" content="dark light" />
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    {
+      !isHome && (
+        <header class="site-header container">
+          <a href={url()} class="home-link" aria-label="Home">
+            <Signature class="mini" />
+          </a>
+        </header>
+      )
+    }
+
+    <main id="content">
+      <slot />
+    </main>
+
+    <footer class="site-footer container">
+      <span>© {new Date().getFullYear()} Ewann P.</span>
+      <nav aria-label="Elsewhere">
+        <a href="https://github.com/Epwo">GitHub</a>
+        <a href="mailto:ewann.postic@hotmail.fr">Email</a>
+        <a href={url("rss.xml")}>RSS</a>
+      </nav>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: absolute;
+    left: -9999px;
+  }
+  .skip:focus {
+    left: 16px;
+    top: 16px;
+    padding: 8px 12px;
+    background: var(--bg-raised);
+    border-radius: 6px;
+    z-index: 10;
+  }
+  .site-header {
+    padding-top: 28px;
+  }
+  .home-link {
+    display: inline-block;
+    width: 108px;
+    opacity: 0.9;
+    transition: opacity 0.15s;
+  }
+  .home-link:hover {
+    opacity: 1;
+  }
+  .site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 48px;
+    padding-bottom: 40px;
+    margin-top: 96px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+  .site-footer nav {
+    display: flex;
+    gap: 20px;
+  }
+  .site-footer a:hover {
+    color: var(--fg);
+  }
+</style>

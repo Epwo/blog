@@ -1,0 +1,43 @@
+---
+import { tagLabel } from "@/lib/articles";
+
+interface Props {
+  tags: string[];
+  wip?: boolean;
+}
+
+const { tags, wip = false } = Astro.props;
+---
+
+{
+  (tags.length > 0 || wip) && (
+    <ul class="tags">
+      {wip && <li class="wip">In progress</li>}
+      {tags.map((t) => <li>{tagLabel(t)}</li>)}
+    </ul>
+  )
+}
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .wip {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+</style>

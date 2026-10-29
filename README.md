@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# lesite — epwo.fr
 
-## Getting Started
+My personal site and blog. Static, built with [Astro](https://astro.build), hosted on GitHub Pages.
 
-First, run the development server:
+Articles live in their own repo, [Epwo/articles](https://github.com/Epwo/articles), and are pulled in at build time.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev            # fetches the articles, then serves on http://localhost:4321/blog
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Writing a post and want to see it before pushing? Point the site at your local articles checkout:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+ARTICLES_DIR=../articles npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Writing an article
 
-## Learn More
+Add a `.md` file to `articles/` in the articles repo. The file name becomes the URL (`/articles/<name>/`).
 
-To learn more about Next.js, take a look at the following resources:
+```yaml
+---
+title: "How I made my media suite"
+date: "2025-04-07"            # YYYY-MM-DD
+summary: "One or two sentences shown in the list and as the page description."
+theme: "Coding,DevOps"        # comma-separated tags
+image: "https://…/cover.png"  # optional cover image
+status: "in progress"         # optional, shows an "In progress" badge
+draft: true                   # optional, hides the article
+---
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Every push to `master` builds and deploys via GitHub Actions (`.github/workflows/deploy.yml`).
+In the repo settings, **Pages → Source** must be set to **GitHub Actions**.
 
-## Deploy on Vercel
+To rebuild when a new article is pushed, add this workflow to the articles repo, with a
+`SITE_DEPLOY_TOKEN` secret (a fine-grained token with *Contents: write* on `Epwo/blog`):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```yaml
+name: Rebuild site
+on: { push: { branches: [main] } }
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh api repos/Epwo/blog/dispatches -f event_type=articles-updated
+        env: { GH_TOKEN: "${{ secrets.SITE_DEPLOY_TOKEN }}" }
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Configuration
+
+| Variable          | Default                  | Use                                         |
+| ----------------- | ------------------------ | ------------------------------------------- |
+| `SITE_URL`        | `https://epwo.github.io` | Canonical origin (use `https://epwo.fr` with a custom domain) |
+| `SITE_BASE`       | `/blog`                  | Path prefix (`/` with a custom domain)      |
+| `ARTICLES_DIR`    | —                        | Local articles folder, skips fetching       |
+| `ARTICLES_REPO`   | `Epwo/articles`          | Where articles are cloned from              |
