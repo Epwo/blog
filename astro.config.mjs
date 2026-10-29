@@ -14,7 +14,8 @@ export default defineConfig({
   markdown: {
     shikiConfig: {
       themes: { light: "github-light", dark: "github-dark-dimmed" },
-      wrap: true,
+      // Scroll long lines instead of wrapping them, so ASCII diagrams stay intact.
+      wrap: false,
     },
   },
 });
